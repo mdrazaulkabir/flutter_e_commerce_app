@@ -28,22 +28,39 @@ class _HomePageState extends State<HomePage> {
       ),
       body: GetBuilder<HomeController>(
         builder: (_) {
-          return ListView.builder(
+          return GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 5,
+            ),
             itemCount: homeController.productData.length,
             itemBuilder: (context, index) {
               ProductModel productModelData = homeController.productData[index];
               return Card(
-                child: ListTile(
-                  leading: Image.network(productModelData.image!,),
-                  // leading: ClipRRect(
-                  //   borderRadius: BorderRadiusGeometry.circular(15),
-                  //   child: Image.network(productModelData.image!,height: 100,width: 100,fit: BoxFit.cover,),
-                  // ),
-                  title: Text("Title is ${productModelData.title}"),
-                  subtitle: Text(
-                    "Description is ${productModelData.description}",
-                  ),
+                child: Column(
+                  children: [
+                    Image.network(productModelData.image!,height: 100,width: 100,fit: BoxFit.fill),
+                    Text("Title is ${productModelData.title}",maxLines: 1,overflow: TextOverflow.ellipsis),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Title is ${productModelData.price}"),
+                      ],
+                    )
+                  ],
                 ),
+                // ListTile(
+                //   leading: Image.network(productModelData.image!),
+                //   // leading: ClipRRect(
+                //   //   borderRadius: BorderRadiusGeometry.circular(15),
+                //   //   child: Image.network(productModelData.image!,height: 100,width: 100,fit: BoxFit.cover,),
+                //   // ),
+                //   title: Text("Title is ${productModelData.title}"),
+                //   subtitle: Text(
+                //     "Description is ${productModelData.description}",
+                //   ),
+                // ),
               );
               // return null;
             },
