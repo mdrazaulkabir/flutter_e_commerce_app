@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   HomeController homeController = Get.put(HomeController());
+  bool productInProgress=false;
 
   @override
   Widget build(BuildContext context) {
