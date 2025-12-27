@@ -8,6 +8,7 @@ class HomeController extends GetxController {
   // HomeServices homeServices=HomeServices();
 
   List<ProductModel>productData=[];
+  bool isLoading=false;
   @override
   void onInit() {
     getAllProducts();
@@ -16,9 +17,12 @@ class HomeController extends GetxController {
 
   void getAllProducts() async {
     try{
+      isLoading=true;
+      update();
       NetworkResponse response = await NetworkCaller.getApiCall(url: AllUrls.productsUrl);
           if(response.statusCode==200){
           // final List<ProductModel>data=[];
+            productData.clear();
             for(Map<String,dynamic>dataList in response.body){
              productData.add(ProductModel.fromJson(dataList));
             }
@@ -26,13 +30,28 @@ class HomeController extends GetxController {
             debugPrint('successfully api called!\n'
                 '${productData}\n'
             );
-            update();
           }
           // else{
           //   CMSnackBar(context: context,message: 'failed');
           // }
     }catch(e){
       print(e);
+    }
+    finally{
+              /*
+         try {
+         isLoading = true;
+         update();
+          // API call
+        } catch (e) {
+          // error
+        } finally {
+          isLoading = false;
+          update();
+        }
+             */
+      isLoading=false;
+      update();
     }
   }
 }

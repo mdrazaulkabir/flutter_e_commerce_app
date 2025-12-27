@@ -14,52 +14,55 @@ class _HomePageGridviewShimmerState extends State<HomePageGridviewShimmer> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                cmShimmer(),
-                cmShimmer()
-              ],
-            ),
-            Row(
-              children: [
-                cmShimmer(),
-                cmShimmer()
-              ],
-            ),
-            Row(
-              children: [
-                cmShimmer(),
-                cmShimmer()
-              ],
-            ),
-            Row(
-              children: [
-                cmShimmer(),
-                cmShimmer()
-              ],
-            ),
-            Row(
-              children: [
-                cmShimmer(),
-                cmShimmer()
-              ],
-            ),
-            Row(
-              children: [
-                cmShimmer(),
-                cmShimmer()
-              ],
-            ),
-            Row(
-              children: [
-                cmShimmer(),
-                cmShimmer()
-              ],
-            ),
-          ],
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  cmShimmer(),
+                  cmShimmer()
+                ],
+              ),
+              Row(
+                children: [
+                  cmShimmer(),
+                  cmShimmer()
+                ],
+              ),
+              Row(
+                children: [
+                  cmShimmer(),
+                  cmShimmer()
+                ],
+              ),
+              Row(
+                children: [
+                  cmShimmer(),
+                  cmShimmer()
+                ],
+              ),
+              Row(
+                children: [
+                  cmShimmer(),
+                  cmShimmer()
+                ],
+              ),
+              Row(
+                children: [
+                  cmShimmer(),
+                  cmShimmer()
+                ],
+              ),
+              Row(
+                children: [
+                  cmShimmer(),
+                  cmShimmer()
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
