@@ -15,7 +15,13 @@ class NetworkCaller{
 
   static Future<NetworkResponse>getApiCall({required String url})async{
     Uri uri=Uri.parse(url);
-    Response response =await get(uri);
+    Response response =await get(
+      uri,
+      // headers: {
+      //   'Accept': 'application/json',
+      //   'User-Agent': 'Mozilla/5.0',
+      // },
+    );
     if(response.statusCode==200){
       final decodedData=jsonDecode(response.body);
       return NetworkResponse(isSuccess: true, statusCode: response.statusCode,body: decodedData);

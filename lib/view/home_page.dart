@@ -37,29 +37,34 @@ class _HomePageState extends State<HomePage> {
             Text('Product',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
             SizedBox(
               height: size.height*.05,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    final data=homeController.productData[index];
-                    return Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(3),
-                      decoration: BoxDecoration(
-                          color: Colors.greenAccent,
-                          borderRadius: BorderRadiusGeometry.circular(5)
-                      ),
-                      child: Align(alignment: Alignment.center,child: Text("Product",style: TextStyle(fontWeight: FontWeight.bold),)),
-                    );
-                  }),
-            ),
-            GetBuilder<HomeController>(   //getBuilder used for update the
-              builder: (_) {
-                if(homeController.isLoading){
-                  return cmCircularProgress();
+              child: GetBuilder<HomeController>(
+                builder: (_) {
+                  return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:homeController.categoryList.length,
+                      itemBuilder: (context, index) {
+                        final category=homeController.categoryList[index];
+                        return Container(
+                          padding: EdgeInsets.all(5),
+                          margin: EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                              color: Colors.greenAccent,
+                              borderRadius: BorderRadiusGeometry.circular(5)
+                          ),
+                          child: Align(alignment: Alignment.center,child: Text(category,style: TextStyle(fontWeight: FontWeight.bold),)),
+                        );
+                      });
                 }
-                return Expanded(
-                  child: GridView.builder(
+              ),
+            ),
+            SizedBox(height: size.height*0.02),
+            Expanded(
+              child: GetBuilder<HomeController>(   //getBuilder used for update the
+                builder: (_) {
+                  if(homeController.isLoadingProducts){
+                    return cmCircularProgress();
+                  }
+                  return GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
@@ -95,9 +100,9 @@ class _HomePageState extends State<HomePage> {
                       );
                       // return null;
                     },
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ],
         ),

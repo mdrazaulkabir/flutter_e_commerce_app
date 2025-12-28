@@ -8,27 +8,35 @@ class HomeController extends GetxController {
   // HomeServices homeServices=HomeServices();
 
   List<ProductModel>productData=[];
-  bool isLoading=false;
+  List<ProductModel>filteredData=[];
+  List<String>categoryList=[];
+  String selectedCategory='Add';
+  
+  bool isLoadingProducts=false;
+
   @override
   void onInit() {
+    //getAllCategory();
     getAllProducts();
     super.onInit();
   }
 
   void getAllProducts() async {
     try{
-      isLoading=true;
+      isLoadingProducts=true;
       update();
       NetworkResponse response = await NetworkCaller.getApiCall(url: AllUrls.productsUrl);
-          if(response.statusCode==200){
+          if(response.isSuccess){
           // final List<ProductModel>data=[];
             productData.clear();
             for(Map<String,dynamic>dataList in response.body){
              productData.add(ProductModel.fromJson(dataList));
             }
             //productData.addAll(data);
+            _getCategoryFromProduct();
             debugPrint('successfully api called!\n'
-                '${productData}\n'
+                // '${productData}\n'
+                '${response.body}\n'
             );
           }
           // else{
@@ -50,8 +58,19 @@ class HomeController extends GetxController {
           update();
         }
              */
-      isLoading=false;
+      isLoadingProducts=false;
       update();
     }
+  }
+  void _getCategoryFromProduct(){
+    categoryList.clear();
+    categoryList.add('Add');
+    for(int i=0; i<=productData.length; i++){
+      String categories=productData[i].category??'';
+      if(!categoryList.contains(categories)){
+        categoryList.add(categories);
+      }
+    }
+    filteredData=List.from(productData);
   }
 }
