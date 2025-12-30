@@ -44,14 +44,20 @@ class _HomePageState extends State<HomePage> {
                       itemCount:homeController.categoryList.length,
                       itemBuilder: (context, index) {
                         final category=homeController.categoryList[index];
-                        return Container(
-                          padding: EdgeInsets.all(5),
-                          margin: EdgeInsets.all(3),
-                          decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              borderRadius: BorderRadiusGeometry.circular(5)
+                        final isSelected=homeController.selectedCategory==category;
+                        return GestureDetector(
+                          onTap: (){
+                            homeController.filteredByCategory(category);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            margin: EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                                color: isSelected? Colors.greenAccent:Colors.grey,
+                                borderRadius: BorderRadiusGeometry.circular(5)
+                            ),
+                            child: Align(alignment: Alignment.center,child: Text(category,style: TextStyle(fontWeight: FontWeight.bold),)),
                           ),
-                          child: Align(alignment: Alignment.center,child: Text(category,style: TextStyle(fontWeight: FontWeight.bold),)),
                         );
                       });
                 }
@@ -70,9 +76,9 @@ class _HomePageState extends State<HomePage> {
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 5,
                     ),
-                    itemCount: homeController.productData.length,
+                    itemCount: homeController.filteredData.length,
                     itemBuilder: (context, index) {
-                      ProductModel productModelData = homeController.productData[index];
+                      ProductModel productModelData = homeController.filteredData[index];
                       return Card(
                         child: Column(
                           children: [

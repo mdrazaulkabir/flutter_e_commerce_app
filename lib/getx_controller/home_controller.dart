@@ -62,10 +62,12 @@ class HomeController extends GetxController {
       update();
     }
   }
+
+
   void _getCategoryFromProduct(){
     categoryList.clear();
-    categoryList.add('Add');
-    for(int i=0; i<=productData.length; i++){
+    categoryList.add('All');
+    for(int i=0; i<productData.length; i++){
       String categories=productData[i].category??'';
       if(!categoryList.contains(categories)){
         categoryList.add(categories);
@@ -73,4 +75,24 @@ class HomeController extends GetxController {
     }
     filteredData=List.from(productData);
   }
+
+
+  void filteredByCategory(String category1){
+    selectedCategory=category1;
+    filteredData.clear();
+    if(category1=="All"){
+      // filteredData.add(productData);  //.add() one item
+      filteredData.addAll(productData);  //.addAll() list of items
+    }
+    else{
+      for(int i=0; i<productData.length; i++){
+        if(productData[i].category==category1){
+          filteredData.add(productData[i]);
+        }
+      }
+    }
+    update();
+  }
+
+
 }
