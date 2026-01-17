@@ -21,14 +21,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size=MediaQuery.sizeOf(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "E-Commerce App",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.greenAccent,
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     "E-Commerce App",
+      //     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      //   ),
+      //   centerTitle: true,
+      //   backgroundColor: Colors.greenAccent,
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
